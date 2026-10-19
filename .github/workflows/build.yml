@@ -72,8 +72,7 @@ jobs:
               rm -f "v$ver/pkg/.gitignore" "v$ver/pkg/package.json" "v$ver/pkg/README.md"
               cp up/tests/cli/favicon.png "v$ver/favicon.png" 2>/dev/null || true
               # Pages that point at the project's own site root: send them to the author's site, except the favicon.
-              sed -i -e 's|href="/favicon.png"|href="favicon.png"|' \
-                     -e 's|href="/\(docs\|jupyterlite\|playground\)|href="https://woxi.ad-si.com/\1|g' "v$ver/index.html"
+              sed -i -e 's#href="/favicon.png"#href="favicon.png"#'                      -e 's#href="/\(docs\|jupyterlite\|playground\)#href="https://woxi.ad-si.com/#g' "v$ver/index.html"
               cp up/license.txt "v$ver/" 2>/dev/null || cp up/LICENSE* "v$ver/" 2>/dev/null || true
               printf 'Built from %s at tag %s\nhttps://github.com/%s/tree/%s\nBuilt with the project'"'"'s own wasm-pack release build. Only change: links to the project'"'"'s docs, notebook and full playground point at woxi.ad-si.com.\n' "$UP" "$tag" "$UP" "$tag" > "v$ver/SOURCE.txt"
             else
